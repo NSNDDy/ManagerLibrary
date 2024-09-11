@@ -1,6 +1,8 @@
 package org.example.managerdemo.Response;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -13,6 +15,5 @@ public class BorrowingResponse {
    private Integer bookId;
    private String dateBorrowed;
    private String dueDate;
-
 
 }

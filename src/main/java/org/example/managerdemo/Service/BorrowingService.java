@@ -48,9 +48,43 @@ public class BorrowingService {
         }).toList();
     }
 
-    public Borrowing getBorrowingById(int id) {
-        return borrowedRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Borrowing not found"));
+    public BorrowingResponse getBorrowingById(Integer id){
+        Optional<Borrowing> borrowings = borrowedRepository.findById(id);
+
+        if (!borrowings.isPresent()) {
+            throw new ResourceNotFoundException("Borrowing with id " +id + "not found");
+        }
+        Borrowing borrowing = borrowings.get();
+
+        BorrowingResponse response = new BorrowingResponse();
+        response.setId(borrowing.getId());
+        response.setUserId(borrowing.getUser().getUserId());
+        response.setBookId(borrowing.getBook().getBookId());
+
+        String fomattedDateBorrowed = DateFormatter.formatDate(borrowing.getDateBorrowed());
+        String fomattedDueDate = DateFormatter.formatDate(borrowing.getDueDate());
+
+        response.setDateBorrowed(fomattedDateBorrowed);
+        response.setDueDate(fomattedDueDate);
+
+        return response;
+
+       /* return borrowings.stream().map(borrowing -> {
+            BorrowingResponse response = new BorrowingResponse();
+            response.setId(borrowing.getId());
+            response.setUserId(borrowing.getUser().getUserId());
+            response.setBookId(borrowing.getBook().getBookId());
+
+            String fomattedDateBorrowed = DateFormatter.formatDate(borrowing.getDateBorrowed());
+            String fomattedDueDate = DateFormatter.formatDate(borrowing.getDueDate());
+
+            response.setDateBorrowed(fomattedDateBorrowed);
+            response.setDueDate(fomattedDueDate);
+            return response;
+        }).toList();*/
+
     }
+
 
     public BorrowingResponse createBorrowing(BorrowingRequest borrowingRequest) {
         Optional<User> user = userRepository.findById(borrowingRequest.getUserId());
@@ -83,6 +117,56 @@ public class BorrowingService {
             throw new ResourceNotFoundException("User or book not found");
         }
     }
+
+    public BorrowingResponse updateBorrowing(Integer id,BorrowingRequest borrowingRequest) {
+        Optional<Borrowing> existingBorrowing = borrowedRepository.findById(id);
+
+        if (!existingBorrowing.isPresent()){
+            throw new ResourceNotFoundException("Borrowing with id " +id + "not found");
+        }
+
+        Borrowing borrowing = existingBorrowing.get();
+
+        Optional<User> user = userRepository.findById(borrowingRequest.getUserId());
+        Optional<Book> book = bookRepository.findById(borrowingRequest.getBookId());
+        if (user.isPresent()) {
+
+            borrowing.setUser(user.get());borrowing.setUser(user.get());
+        }else {
+            throw new ResourceNotFoundException("User not found");
+        }
+
+        if (book.isPresent()){
+            borrowing.setBook(book.get());
+        }else {
+        throw new ResourceNotFoundException("Book not found");
+        }
+
+
+        borrowing.setDateBorrowed(borrowingRequest.getDateBorrowed());
+        borrowing.setDueDate(borrowingRequest.getDueDate());
+
+        Borrowing updateBorrowing = borrowedRepository.save(borrowing);
+
+        BorrowingResponse response = new BorrowingResponse();
+        response.setId(updateBorrowing.getId());
+        response.setUserId(updateBorrowing.getUser().getUserId());
+        response.setBookId(updateBorrowing.getBook().getBookId());
+
+        String formatteddateBorrowed = DateFormatter.formatDate(updateBorrowing.getDateBorrowed());
+        String formattedDueDate = DateFormatter.formatDate(updateBorrowing.getDueDate());
+
+        response.setDateBorrowed(formatteddateBorrowed);
+        response.setDueDate(formattedDueDate);
+
+        return response;
+    }
+
+    public void deleteBorrowing(Integer id) {
+        borrowedRepository.deleteById(id);
+    }
+
+
 
 
 }
