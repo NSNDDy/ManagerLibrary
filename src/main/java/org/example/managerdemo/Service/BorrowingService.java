@@ -59,8 +59,8 @@ public class BorrowingService {
         response.setUserId(borrowing.getUser().getUserId());
         response.setBookId(borrowing.getBook().getBookId());
 
-        String fomattedDateBorrowed = DateFormatter.formatDate(borrowing.getDateBorrowed());
-        String fomattedDueDate = DateFormatter.formatDate(borrowing.getDueDate());
+        String fomattedDateBorrowed = DateUtils.formatDate(borrowing.getDateBorrowed());
+        String fomattedDueDate = DateUtils.formatDate(borrowing.getDueDate());
 
         response.setDateBorrowed(fomattedDateBorrowed);
         response.setDueDate(fomattedDueDate);
