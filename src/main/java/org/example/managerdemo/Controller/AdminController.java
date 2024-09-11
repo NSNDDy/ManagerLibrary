@@ -2,7 +2,7 @@ package org.example.managerdemo.Controller;
 
 import jakarta.validation.Valid;
 import org.example.managerdemo.Entity.Admin;
-import org.example.managerdemo.Request.AdminRequest;
+import org.example.managerdemo.dto.Request.AdminRequest;
 import org.example.managerdemo.Service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

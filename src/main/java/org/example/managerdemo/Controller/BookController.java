@@ -27,7 +27,6 @@ public class BookController {
     public ResponseEntity<Book> getBookById(@PathVariable  Integer id){
         Book book = bookService.getBookById(id);
         return ResponseEntity.ok(book);
-
     }
 
     @PostMapping

@@ -1,6 +1,5 @@
 package org.example.managerdemo.Service;
 
-import org.example.managerdemo.Conf.DateFormatter;
 import org.example.managerdemo.Entity.Book;
 import org.example.managerdemo.Entity.Borrowing;
 import org.example.managerdemo.Entity.User;
@@ -8,13 +7,12 @@ import org.example.managerdemo.Exception.ResourceNotFoundException;
 import org.example.managerdemo.Repository.BookRepository;
 import org.example.managerdemo.Repository.BorrowedRepository;
 import org.example.managerdemo.Repository.UserRepository;
-import org.example.managerdemo.Request.BorrowingRequest;
+import org.example.managerdemo.common.DateUtils;
+import org.example.managerdemo.dto.Request.BorrowingRequest;
 import org.example.managerdemo.Response.BorrowingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +37,8 @@ public class BorrowingService {
             response.setUserId(borrowing.getUser().getUserId());
             response.setBookId(borrowing.getBook().getBookId());
 
-            String fomattedDateBorrowed = DateFormatter.formatDate(borrowing.getDateBorrowed());
-            String fomattedDueDate = DateFormatter.formatDate(borrowing.getDueDate());
+            String fomattedDateBorrowed = DateUtils.formatDate(borrowing.getDateBorrowed());
+            String fomattedDueDate = DateUtils.formatDate(borrowing.getDueDate());
 
             response.setDateBorrowed(fomattedDateBorrowed);
             response.setDueDate(fomattedDueDate);
@@ -71,8 +69,8 @@ public class BorrowingService {
             response.setUserId(savedBorrowing.getUser().getUserId());
             response.setBookId(savedBorrowing.getBook().getBookId());
 
-            String fomattedDateBorrowed = DateFormatter.formatDate(savedBorrowing.getDateBorrowed());
-            String fomattedDueDate = DateFormatter.formatDate(savedBorrowing.getDueDate());
+            String fomattedDateBorrowed = DateUtils.formatDate(savedBorrowing.getDateBorrowed());
+            String fomattedDueDate = DateUtils.formatDate(savedBorrowing.getDueDate());
 
             response.setDateBorrowed(fomattedDateBorrowed);
             response.setDueDate(fomattedDueDate);

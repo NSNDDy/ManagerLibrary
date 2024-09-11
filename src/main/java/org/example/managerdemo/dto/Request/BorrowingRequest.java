@@ -1,4 +1,4 @@
-package org.example.managerdemo.Request;
+package org.example.managerdemo.dto.Request;
 
 import lombok.Getter;
 import lombok.Setter;

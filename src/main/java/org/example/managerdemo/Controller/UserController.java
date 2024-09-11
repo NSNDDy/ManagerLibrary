@@ -3,6 +3,10 @@ package org.example.managerdemo.Controller;
 import jakarta.validation.Valid;
 import org.example.managerdemo.Entity.User;
 import org.example.managerdemo.Service.UserService;
+import org.example.managerdemo.Service.impl.UserServiceImpl;
+import org.example.managerdemo.dto.ApiResponse;
+import org.example.managerdemo.dto.Request.UserRequest;
+import org.example.managerdemo.dto.response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,20 +18,23 @@ import java.util.List;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-
-    @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable  int id) {
-        User user = userService.getUserById(id);
-        return  ResponseEntity.ok(user);
-    }
+//
+//    @GetMapping
+//    public List<User> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ApiResponse<UserResponse>> getUserById(@PathVariable  int id) {
+//        UserResponse user = userService.getUserById(id);
+//        return  ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, user, ""));
+//    }
 
 
    /* @PostMapping
@@ -53,20 +60,19 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }*/
     @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user){
-        User createdUser = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
-
+    public ResponseEntity<ApiResponse<String>> createUser(@Valid @RequestBody UserRequest user){
+        userService.saveUser(user);
+        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Tạo tài khoản thành công", "Tạo tài khoản thành công"));
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable int id, @Valid @RequestBody User user){
-        User updateUser = userService.updateUser(id,user);
-        return ResponseEntity.ok(updateUser);
-    }
-
-
-    @DeleteMapping("/{id}")
+//
+//    @PutMapping("/{id}")
+//    public ResponseEntity<User> updateUser(@PathVariable int id, @Valid @RequestBody User user){
+//        User updateUser = userService.updateUser(id,user);
+//        return ResponseEntity.ok(updateUser);
+//    }
+//
+//
+    @PostMapping("/delete")
     public ResponseEntity<User> deleteUser(@PathVariable int id){
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
