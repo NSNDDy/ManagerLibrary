@@ -1,6 +1,6 @@
-package org.example.managerdemo.Repository;
+package org.example.managerdemo.repository;
 
-import org.example.managerdemo.Entity.User;
+import org.example.managerdemo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

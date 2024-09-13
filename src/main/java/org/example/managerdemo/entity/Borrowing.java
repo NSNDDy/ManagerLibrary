@@ -1,8 +1,7 @@
-package org.example.managerdemo.Entity;
+package org.example.managerdemo.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

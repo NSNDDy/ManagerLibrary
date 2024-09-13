@@ -1,9 +1,6 @@
-package org.example.managerdemo.dto.Request;
+package org.example.managerdemo.dto.request;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequest {
+
     @NotBlank(message = "name is mandatory")
     @Size(max = 100, message = "name should not exceed 100 characters")
     private String name;
