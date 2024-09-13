@@ -50,7 +50,7 @@ public class BorrowingController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<String>> deleteBorrowing(@PathVariable Integer id){
         borrowingService.deleteBorrowing(id);
-        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Delete Success", "Delete Success"));
+        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Delete Success", ""));
     }
 
 }

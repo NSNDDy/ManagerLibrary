@@ -10,9 +10,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserBorrowingBookResponse {
-    Integer userId;
-    String name;
-    String title;
-    String dateBorrowed;
-    String dueDate;
+   private Integer userId;
+   private String name;
+   private String title;
+   private String dateBorrowed;
+   private String dueDate;
 }
