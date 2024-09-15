@@ -22,13 +22,9 @@ public class Return {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Integer borrowId;
 
-   @ManyToOne
-   @JoinColumn(name = "user_id", referencedColumnName = "user_Id")
-   private User user;
-
-   @ManyToOne
-   @JoinColumn(name = "book_id", referencedColumnName = "book_Id")
-   private Book book;
+   @OneToOne
+   @JoinColumn(name = "borrow_id2", referencedColumnName = "Id")
+   private Borrowing borrowing;
 
    @NotNull(message = "Date returned is mandatory")
    private Date dateReturned;

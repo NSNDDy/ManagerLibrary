@@ -19,7 +19,7 @@ public class Borrowing {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Integer id;
+   private Integer Id;
 
    @ManyToOne
    @JoinColumn(name = "user_id", referencedColumnName = "user_Id")
