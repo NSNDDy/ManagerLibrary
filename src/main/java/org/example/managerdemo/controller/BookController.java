@@ -33,8 +33,7 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<BookResponse>> getBookById(@PathVariable Integer id){
-        BookResponse bookResponse = bookService.getBookById(id);
-        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Danh sách sách", bookResponse));
+        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Danh sách sách", bookService.getBookById(id)));
     }
 
     @PostMapping
@@ -45,8 +44,7 @@ public class BookController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<BookResponse>> updateBook(@PathVariable Integer id, @Valid @RequestBody BookRequest bookRequest){
-        BookResponse books = bookService.updateBook(id, bookRequest);
-        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Cập nhật thành công", books));
+        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Cập nhật thành công", bookService.updateBook(id, bookRequest)));
     }
 
 

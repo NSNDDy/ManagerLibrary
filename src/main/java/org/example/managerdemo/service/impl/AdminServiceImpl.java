@@ -74,8 +74,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteAdmin(Integer id) {
         Admin admin = adminRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id Admin not found!"));
-        adminRepository.delete(admin);
-
+        adminRepository.save(admin);
     }
 
     private void validateAdminRequest(AdminRequest adminRequest) {

@@ -27,5 +27,4 @@ public class BookRequest {
 
     @NotBlank(message = "category is mandatory")
     private String category;
-
 }
